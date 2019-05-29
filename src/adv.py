@@ -43,20 +43,32 @@ player = Player(room['outside'])
 
 print(player)
 # Write a loop that:
-#
+
+def move(direction, current_room):
+    attribute = direction + '_to'
+
+    if hasattr(current_room, attribute):
+        return getattr(current_room, attribute)
+    else:
+        print("Sorry, the path is blocked, find another way!! \n")
+        return current_room
+
+
+while True:
 # * Prints the current room name
+    print("You are currently in the", player.current_room.name)
 # * Prints the current description (the textwrap module might be useful here).
+    print("Take note,", player.current_room.description)
 # * Waits for user input and decides what to do.
-#
+    cmd = input("\n> please input here: ").lower()
 # If the user enters a cardinal direction, attempt to move to the room there.
+
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-
-while True:
-    cmd = input("please input here: ")
-    print(cmd)
+    # print(cmd)
     if cmd == "q":
+        print("The loop has been broken!")
         break
+    player.current_room = move(cmd, player.current_room)
         
-print("The loop has been broken!")
